@@ -1,0 +1,67 @@
+<div class="form-group">
+  Items
+  <select ng-model="items" (change)="dataChanged($event)" name="items" class="form-control">
+    <option value=" "></option>
+    <option *ngFor="let item of items" value={{item.productId}}>
+      {{item.productName}}
+    </option>
+  </select>
+  <br />
+  <br />
+  <button (click)="edit()">edit Item </button>
+  <div *ngIf="edited">
+    <label>Enter unit price</label>
+    <input class="form-control"
+           [(ngModel)]="editUnitPrice" />
+    <label>Enter AvailableAmount</label>
+    <input class="form-control"
+           [(ngModel)]="editAvailableAmount"
+            />
+    <button (click)="saveItem()">save Item </button>
+  </div>
+  <br />
+  <br />
+  <label for="count">Enter Quentity</label>
+  <input class="form-control"
+         id="count"
+         (blur)="CountTotal($event)" />
+  <br />
+  <span style="color:red">{{AvailableQuantityErrorMs}}</span>
+  <br />
+  <span>Total  : {{Total}}</span>  <br />  <span>Total Amount  : {{TotalCount}}</span>
+  <br />
+  <br />
+  <button (click)="Add()">Add Item</button>
+  <span>{{addMessage}}</span> <button (click)="save()">Save Invoice </button>
+  <span>{{SaveErrorMs}}</span>
+  <br />
+  <br />
+  <label for="show">Show Invoice By Its Id Number</label>
+  <input class="form-control"
+         id="show"
+         [(ngModel)]="invoiceId"
+         placeholder="Enter Invoice Number and press enter"
+         (keyup.enter)="showInvice($event)" />
+  <br />
+  <br />
+  <button (click)="delete()">Delete Invoice </button>
+</div>
+<br />
+<div style="overflow:auto;height:300px;">
+  <span>{{noData}}</span>
+  <span>{{InvoiceNumber}}</span>
+  <div class="card" *ngFor="let invoiceItem of invoiceItems">
+    <div class="card-body">
+      <p>Item Id: {{invoiceItem.itemId}}</p>
+      <p>Item Name: {{invoiceItem.itemName}}</p>
+      <p>Description: {{invoiceItem.descrption}}</p>
+      <p>Unit Price: {{invoiceItem.unitPrice}}</p>
+      <p>Quentity: {{invoiceItem.quentity}}</p>
+      <p>Tota: {{invoiceItem.total}}</p>
+    </div>
+  </div>
+</div>
+<span>{{TotalAmount}}</span>
+
+
+
